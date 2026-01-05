@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="البحث العقاري الذكي - تصفح مجموعة عقارات عمر الصيعري المعروضة للبيع والاستثمار في جميع إمارات الدولة مع فلترة متقدمة.">
+    <title>البحث الذكي | عمر الصيعري - عقارات الإمارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-gold: #ffc107;
+            --light-bg: #f8f9fa;
+        }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background-color: var(--light-bg);
+            color: #333;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        .search-container { 
+            background: white; 
+            border-radius: 30px; 
+            padding: 40px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); 
+            margin-top: -60px; 
+            z-index: 100; 
+            position: relative; 
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .hero-title { 
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            color: white; 
+            padding: 100px 0 140px; 
+            text-align: center; 
+        }
+        .property-card { 
+            border: none; 
+            border-radius: 25px; 
+            overflow: hidden; 
+            transition: 0.4s; 
+            background: white; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            height: 100%; 
+            cursor: pointer;
+            border-top: 5px solid transparent;
+        }
+        .property-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+            border-top: 5px solid var(--primary-gold);
+        }
+        .filter-label { 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            color: #64748b; 
+            margin-bottom: 8px; 
+            display: block; 
+            margin-right: 10px; 
+        }
+        .custom-select { 
+            border-radius: 15px; 
+            border: 1px solid #e2e8f0; 
+            padding: 12px; 
+            font-weight: 600; 
+            width: 100%; 
+            outline: none;
+            background-color: white;
+            transition: 0.3s;
+        }
+        .custom-select:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+        .btn-search { 
+            background: var(--primary-gold); 
+            color: #000; 
+            font-weight: 900; 
+            border-radius: 15px; 
+            padding: 15px; 
+            transition: 0.3s; 
+            border: none; 
+            width: 100%; 
+            font-size: 1.1rem;
+        }
+        .btn-search:hover { 
+            background: #e5ac00; 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+        }
+        .btn-reset {
+            background: #f1f5f9;
+            color: #64748b;
+            border-radius: 15px;
+            padding: 12px 25px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .btn-reset:hover {
+            background: #e2e8f0;
+            color: var(--primary-dark);
+        }
+        .nav-link:hover { 
+            color: var(--primary-gold) !important; 
+        }
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-dark);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+        .feature-item {
+            text-align: center;
+            flex: 1;
+        }
+        .feature-item i {
+            color: var(--primary-gold);
+            margin-bottom: 5px;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+        }
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            color: var(--primary-gold);
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+        .intro-section {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-right: 5px solid var(--primary-gold);
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/971509505019" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- الشريط العلوي -->
+    <nav class="navbar navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-black m-0 d-flex align-items-center" href="index.html">
+                <div class="me-2">
+                    <span class="fw-bold fs-4 text-dark">عمر الصيعري</span>
+                    <span class="badge bg-warning text-dark align-middle" style="font-size: 0.6rem; margin-right: 5px;">وسيط معتمد</span>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a class="nav-link text-secondary p-0" href="index.html">الرئيسية</a>
+                <a class="nav-link text-secondary p-0" href="services.html">خدماتي</a>
+                <a class="nav-link fw-bold text-dark p-0" href="properties.html">العقارات</a>
+                <a class="nav-link text-secondary p-0" href="legal.html">التراخيص</a>
+                <a class="btn btn-dark rounded-pill px-4 py-2 fw-bold" href="https://wa.me/971509505019">
+                    <i class="fab fa-whatsapp me-1"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- الهيرو -->
+    <header class="hero-title">
+        <div class="container">
+            <h1 class="display-5 fw-black mb-3">محرك البحث العقاري الذكي</h1>
+            <p class="opacity-75 lead">استخدم أدوات الفلترة المتقدمة للعثور على العقار المثالي في جميع إمارات الدولة</p>
+        </div>
+    </header>
+
+    <!-- قسم المقدمة -->
+    <div class="container mt-4">
+        <div class="intro-section">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="fw-bold mb-3">لماذا تبحث مع عمر الصيعري؟</h3>
+                    <p class="text-muted mb-0">
+                        كوسيط عقاري معتمد، أضمن لك الوصول إلى قائمة عقارات حصرية قد لا تجدها على المنصات العامة. 
+                        كل عقار هنا تم التحقق منه ودراسته لضمان جودته ومناسبته للسوق الإماراتي.
+                    </p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex justify-content-center">
+                        <div class="text-center me-4">
+                            <div class="fs-3 fw-bold text-warning">500+</div>
+                            <div class="small text-muted">عقار متاح</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="fs-3 fw-bold text-warning">7</div>
+                            <div class="small text-muted">إمارات مغطاة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الفلترة -->
+    <div class="container">
+        <div class="search-container shadow-lg">
+            <div class="row g-3">
+                <div class="col-md-2">
+                    <label class="filter-label">نوع العملية</label>
+                    <select id="purpose" class="custom-select">
+                        <option value="">الكل</option>
+                        <option value="شراء">شراء</option>
+                        <option value="تأجير">تأجير</option>
+                        <option value="استثمار">استثمار</option>
+                        <option value="بيع">بيع</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="filter-label">نوع العقار</label>
+                    <select id="type" class="custom-select">
+                        <option value="">الكل</option>
+                        <option value="فيلا">فيلا</option>
+                        <option value="شقة">شقة</option>
+                        <option value="أرض">أرض</option>
+                        <option value="بناية">بناية</option>
+                        <option value="مكتب">مكتب / تجاري</option>
+                        <option value="مخزن">مخزن / صناعي</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="filter-label">الإمارة</label>
+                    <select id="emirate" class="custom-select" onchange="loadRegions()">
+                        <option value="">الكل</option>
+                        <option value="أبوظبي">أبوظبي</option>
+                        <option value="دبي">دبي</option>
+                        <option value="الشارقة">الشارقة</option>
+                        <option value="عجمان">عجمان</option>
+                        <option value="رأس الخيمة">رأس الخيمة</option>
+                        <option value="الفجيرة">الفجيرة</option>
+                        <option value="أم القيوين">أم القيوين</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="filter-label">المنطقة</label>
+                    <select id="region" class="custom-select">
+                        <option value="">الكل</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="filter-label">السعر (درهم)</label>
+                    <select id="price" class="custom-select">
+                        <option value="">أي سعر</option>
+                        <option value="0-1000000">حتى 1 مليون</option>
+                        <option value="1000000-3000000">1 - 3 ملايين</option>
+                        <option value="3000000-7000000">3 - 7 ملايين</option>
+                        <option value="7000000-15000000">7 - 15 مليون</option>
+                        <option value="15000000-999999999">أكثر من 15 مليون</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="filter-label">الغرف</label>
+                    <select id="bedrooms" class="custom-select">
+                        <option value="">أي عدد</option>
+                        <option value="1">1 غرفة</option>
+                        <option value="2">2 غرف</option>
+                        <option value="3">3 غرف</option>
+                        <option value="4">4 غرف</option>
+                        <option value="5">5+ غرف</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-8 mt-3">
+                    <div class="d-flex align-items-center">
+                        <button onclick="startSearch()" class="btn-search shadow me-3">
+                            <i class="fas fa-search me-2"></i> بحث متقدم
+                        </button>
+                        <button onclick="resetFilters()" class="btn-reset">
+                            <i class="fas fa-redo me-2"></i> إعادة تعيين
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 text-left">
+                    <p class="text-muted small mb-0">
+                        <i class="fas fa-info-circle text-warning me-1"></i>
+                        لم تجد ما تبحث عنه؟ <a href="https://wa.me/971509505019" class="text-dark fw-bold">تواصل معي</a> للحصول على عروض خاصة
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- نتائج البحث -->
+        <div class="py-5 mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 id="results-count" class="fw-bold text-dark m-0">جاري تحميل العقارات...</h3>
+                <div class="d-none" id="results-info">
+                    <span class="badge bg-light text-dark border me-2" id="results-type"></span>
+                    <span class="badge bg-warning text-dark" id="results-time"></span>
+                </div>
+            </div>
+            
+            <!-- سبينر التحميل -->
+            <div id="loading-spinner" class="loading-spinner">
+                <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">جاري التحميل...</span>
+                </div>
+                <p class="mt-3 text-secondary">جاري تحميل العقارات المطابقة لبحثك...</p>
+            </div>
+            
+            <!-- شبكة العقارات -->
+            <div id="properties-grid" class="row g-4">
+                <!-- سيتم ملؤها جافاسكريبت -->
+            </div>
+            
+            <!-- حالة عدم وجود نتائج -->
+            <div id="no-results" class="no-results" style="display: none;">
+                <i class="fas fa-search fa-3x text-muted mb-4 opacity-50"></i>
+                <h4 class="fw-bold mb-3">لم نعثر على عقارات مطابقة</h4>
+                <p class="text-muted mb-4">جرب تغيير معايير البحث أو تواصل معي مباشرة للحصول على عروض خاصة غير متاحة على الموقع.</p>
+                <a href="https://wa.me/971509505019" class="btn btn-warning rounded-pill px-4 py-2">
+                    <i class="fab fa-whatsapp me-2"></i> تواصل للحصول على عروض خاصة
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="fw-bold mb-3">عمر الصيعري</h4>
+                    <p class="text-light opacity-75">وسيط عقاري معتمد في دولة الإمارات العربية المتحدة. أقدم خدمات عقارية شاملة مع التركيز على الشفافية والاحترافية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/971509505019" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">الرئيسية</a></li>
+                        <li class="mb-2"><a href="services.html">خدماتي</a></li>
+                        <li class="mb-2"><a href="properties.html">العقارات</a></li>
+                        <li class="mb-2"><a href="legal.html">التراخيص</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+971509505019">+971 50 950 5019</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:omar@property.com">omar@property.com</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span>دبي، الإمارات العربية المتحدة</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3">ساعات العمل</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">السبت - الخميس: 9 صباحاً - 7 مساءً</li>
+                        <li class="mb-2">الجمعة: 2 ظهراً - 7 مساءً</li>
+                        <li class="mb-2">استشارات عقارية: متاحة 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light opacity-25 my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 عمر الصيعري. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ترخيص رقم: <span class="text-warning">123456</span> من الهيئة التنظيمية للإمارات</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- الجافاسكريبت -->
+    <script>
+        // قاعدة بيانات المناطق حسب تخطيط البلدية (مبسطة)
+        const uaeData = {
+            "أبوظبي": ["الكل", "جزيرة ياس", "جزيرة السعديات", "الروضة", "مدينة خليفة", "مدينة محمد بن زايد", "الشامخة", "المركز", "البطين"],
+            "دبي": ["الكل", "دبي مارينا", "وسط المدينة", "البرشاء", "جميرا", "مردف", "قرية جميرا", "البرج", "الخليج التجاري", "دبي هيلز"],
+            "الشارقة": ["الكل", "مويلح", "الخان", "المجاز", "الطي", "الرحمانية", "السيوح", "الناصرية", "المنطقة الصناعية"],
+            "عجمان": ["الكل", "الروضة", "المويهات", "الجرف", "وسط المدينة", "الصناعية"],
+            "رأس الخيمة": ["الكل", "الرفاعة", "الحمراء", "الجزيرة الحمراء", "جلفار", "النخيل"],
+            "الفجيرة": ["الكل", "دبا الفجيرة", "قدفع", "مربح", "وسط المدينة"],
+            "أم القيوين": ["الكل", "السلمة", "الحمراء", "المنطقة القديمة", "الصناعية الجديدة"]
+        };
+
+        // بيانات وهمية احتياطية
+        const fallbackProperties = [
+            {
+                _id: "1",
+                title: "فيلا فاخرة في دبي مارينا",
+                location: "دبي - دبي مارينا",
+                price: "5,200,000",
+                type: "فيلا",
+                purpose: "شراء",
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 4,
+                bathrooms: 5,
+                area: "4500 قدم",
+                features: ["مسبح", "3 مواقف", "صالة رياضية"]
+            },
+            {
+                _id: "2",
+                title: "شقة بثلاث غرف في برج خليفة",
+                location: "دبي - وسط المدينة",
+                price: "3,750,000",
+                type: "شقة",
+                purpose: "استثمار",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 3,
+                bathrooms: 3,
+                area: "1800 قدم",
+                features: ["إطلالة بانورامية", "تشطيب سوبر لوكس", "موقفين"]
+            },
+            {
+                _id: "3",
+                title: "أرض سكنية للاستثمار في الشارقة",
+                location: "الشارقة - مويلح",
+                price: "1,850,000",
+                type: "أرض",
+                purpose: "استثمار",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 0,
+                bathrooms: 0,
+                area: "10000 قدم",
+                features: ["موقع استراتيجي", "تصريح بناء متوفر"]
+            },
+            {
+                _id: "4",
+                title: "فيلا عائلية في أبوظبي",
+                location: "أبوظبي - مدينة محمد بن زايد",
+                price: "4,500,000",
+                type: "فيلا",
+                purpose: "شراء",
+                image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 5,
+                bathrooms: 6,
+                area: "5200 قدم",
+                features: ["حديقة خاصة", "مسبح", "4 مواقف", "غرفة سائق"]
+            },
+            {
+                _id: "5",
+                title: "شقة للإيجار في الجميرا",
+                location: "دبي - جميرا",
+                price: "180,000",
+                type: "شقة",
+                purpose: "تأجير",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 2,
+                bathrooms: 2,
+                area: "1400 قدم",
+                features: ["مفروشة", "إطلالة بحر", "صالة رياضية"]
+            },
+            {
+                _id: "6",
+                title: "مكتب تجاري في دبي",
+                location: "دبي - الخليج التجاري",
+                price: "2,900,000",
+                type: "مكتب",
+                purpose: "استثمار",
+                image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1920&auto=format&fit=crop",
+                bedrooms: 0,
+                bathrooms: 2,
+                area: "1200 قدم",
+                features: ["تشطيب فاخر", "مواقف زوار", "خدمات 24/7"]
+            }
+        ];
+
+        // تحميل المناطق عند اختيار الإمارة
+        function loadRegions() {
+            const emirate = document.getElementById('emirate').value;
+            const regionSelect = document.getElementById('region');
+            
+            // مسح الخيارات الحالية
+            regionSelect.innerHTML = '<option value="">الكل</option>';
+            
+            if (emirate && uaeData[emirate]) {
+                uaeData[emirate].forEach(r => {
+                    if (r !== "الكل") {
+                        regionSelect.innerHTML += `<option value="${r}">${r}</option>`;
+                    }
+                });
+            }
+        }
+
+        // إعادة تعيين الفلاتر
+        function resetFilters() {
+            document.getElementById('purpose').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('emirate').value = '';
+            document.getElementById('region').innerHTML = '<option value="">الكل</option>';
+            document.getElementById('price').value = '';
+            document.getElementById('bedrooms').value = '';
+            
+            // إعادة البحث
+            startSearch();
+        }
+
+        // البحث الرئيسي
+        async function startSearch() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const propertiesGrid = document.getElementById('properties-grid');
+            const noResults = document.getElementById('no-results');
+            const resultsCount = document.getElementById('results-count');
+            const resultsInfo = document.getElementById('results-info');
+            const resultsType = document.getElementById('results-type');
+            const resultsTime = document.getElementById('results-time');
+            
+            // إظهار سبينر التحميل وإخفاء النتائج القديمة
+            loadingSpinner.style.display = 'block';
+            propertiesGrid.innerHTML = '';
+            noResults.style.display = 'none';
+            resultsInfo.classList.add('d-none');
+            
+            // جمع الفلاتر
+            const filters = {
+                purpose: document.getElementById('purpose').value,
+                type: document.getElementById('type').value,
+                emirate: document.getElementById('emirate').value,
+                region: document.getElementById('region').value,
+                price: document.getElementById('price').value,
+                bedrooms: document.getElementById('bedrooms').value
+            };
+            
+            // تحديث نص البحث
+            let searchText = "جميع العقارات المتاحة";
+            if (filters.emirate) searchText = `عقارات في ${filters.emirate}`;
+            if (filters.type) searchText += ` | نوع: ${filters.type}`;
+            if (filters.purpose) searchText += ` | عملية: ${filters.purpose}`;
+            
+            resultsCount.innerText = searchText;
+            
+            try {
+                // محاولة جلب البيانات من API
+                const res = await fetch('https://omar-backend.onrender.com/api/properties');
+                let data = [];
+                
+                if (res.ok) {
+                    data = await res.json();
+                } else {
+                    // إذا فشل الاتصال، استخدام البيانات الوهمية
+                    throw new Error('فشل الاتصال بالخادم');
+                }
+                
+                // استخدام البيانات الوهمية إذا كانت البيانات فارغة
+                if (!data || data.length === 0) {
+                    data = fallbackProperties;
+                }
+                
+                // تطبيق الفلاتر
+                const filtered = data.filter(p => {
+                    // فلترة الإمارة والمنطقة
+                    if (filters.emirate && !p.location.includes(filters.emirate)) return false;
+                    if (filters.region && filters.region !== "الكل" && !p.location.includes(filters.region)) return false;
+                    
+                    // فلترة النوع
+                    if (filters.type && p.type !== filters.type) return false;
+                    
+                    // فلترة الغرض
+                    if (filters.purpose && p.purpose !== filters.purpose) return false;
+                    
+                    // فلترة عدد الغرف
+                    if (filters.bedrooms && p.bedrooms != filters.bedrooms) return false;
+                    
+                    // فلترة السعر (مبسطة)
+                    if (filters.price) {
+                        const [min, max] = filters.price.split('-').map(Number);
+                        const priceNum = parseInt(p.price.replace(/[^0-9]/g, ''));
+                        
+                        if (priceNum < min || priceNum > max) return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // إخفاء سبينر التحميل
+                loadingSpinner.style.display = 'none';
+                
+                // عرض عدد النتائج
+                resultsCount.innerText = `وجدت ${filtered.length} عقاراً مطابقاً`;
+                
+                // تحديث المعلومات الإضافية
+                if (filtered.length > 0) {
+                    const typeCount = {};
+                    filtered.forEach(p => {
+                        typeCount[p.type] = (typeCount[p.type] || 0) + 1;
+                    });
+                    
+                    const mostCommonType = Object.keys(typeCount).reduce((a, b) => typeCount[a] > typeCount[b] ? a : b);
+                    resultsType.innerText = `الأكثر: ${mostCommonType}`;
+                    resultsTime.innerText = `تم التحديث الآن`;
+                    resultsInfo.classList.remove('d-none');
+                }
+                
+                // عرض النتائج
+                if (filtered.length > 0) {
+                    propertiesGrid.innerHTML = filtered.map(p => `
+                        <div class="col-md-4">
+                            <div class="property-card" onclick="window.location.href='details.html?id=${p._id}'">
+                                <div class="position-relative">
+                                    <img src="${p.image}" class="w-100" style="height:220px; object-fit:cover;" alt="${p.title}">
+                                    <div class="property-badge">
+                                        ${p.type === 'تأجير' ? 'للإيجار' : 'للبيع'}
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <span class="badge bg-light text-dark border">${p.location.split(' - ')[1] || p.location}</span>
+                                        <span class="text-warning fw-bold">${p.purpose === 'تأجير' ? 'سنوياً' : ''}</span>
+                                    </div>
+                                    <h5 class="fw-bold mb-3 text-dark" style="font-size: 1.1rem;">${p.title}</h5>
+                                    
+                                    <div class="property-features">
+                                        ${p.bedrooms ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-bed"></i>
+                                            <div class="small">${p.bedrooms} غرف</div>
+                                        </div>` : ''}
+                                        ${p.bathrooms ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-bath"></i>
+                                            <div class="small">${p.bathrooms} حمام</div>
+                                        </div>` : ''}
+                                        ${p.area ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-arrows-alt"></i>
+                                            <div class="small">${p.area}</div>
+                                        </div>` : ''}
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
+                                        <span class="text-primary fw-bold fs-5">${p.price} درهم</span>
+                                        <span class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                                            التفاصيل <i class="fas fa-arrow-left ms-1"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    // إذا لم توجد نتائج
+                    noResults.style.display = 'block';
+                }
+                
+            } catch (e) {
+                console.warn("فشل الاتصال بالخادم، جاري عرض عقارات افتراضية:", e.message);
+                
+                // إخفاء سبينر وإظهار البيانات الوهمية
+                loadingSpinner.style.display = 'none';
+                
+                // تطبيق الفلاتر الأساسية على البيانات الوهمية
+                let filtered = fallbackProperties;
+                
+                if (filters.emirate) {
+                    filtered = filtered.filter(p => p.location.includes(filters.emirate));
+                }
+                if (filters.type) {
+                    filtered = filtered.filter(p => p.type === filters.type);
+                }
+                if (filters.purpose) {
+                    filtered = filtered.filter(p => p.purpose === filters.purpose);
+                }
+                
+                resultsCount.innerText = `وجدت ${filtered.length} عقاراً افتراضياً`;
+                
+                if (filtered.length > 0) {
+                    // عرض البيانات الوهمية
+                    propertiesGrid.innerHTML = filtered.map(p => `
+                        <div class="col-md-4">
+                            <div class="property-card" onclick="window.location.href='details.html?id=${p._id}'">
+                                <div class="position-relative">
+                                    <img src="${p.image}" class="w-100" style="height:220px; object-fit:cover;" alt="${p.title}">
+                                    <div class="property-badge">
+                                        ${p.type === 'تأجير' ? 'للإيجار' : 'للبيع'}
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <span class="badge bg-light text-dark border">${p.location.split(' - ')[1] || p.location}</span>
+                                        <span class="text-warning fw-bold">${p.purpose === 'تأجير' ? 'سنوياً' : ''}</span>
+                                    </div>
+                                    <h5 class="fw-bold mb-3 text-dark" style="font-size: 1.1rem;">${p.title}</h5>
+                                    
+                                    <div class="property-features">
+                                        ${p.bedrooms ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-bed"></i>
+                                            <div class="small">${p.bedrooms} غرف</div>
+                                        </div>` : ''}
+                                        ${p.bathrooms ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-bath"></i>
+                                            <div class="small">${p.bathrooms} حمام</div>
+                                        </div>` : ''}
+                                        ${p.area ? `
+                                        <div class="feature-item">
+                                            <i class="fas fa-arrows-alt"></i>
+                                            <div class="small">${p.area}</div>
+                                        </div>` : ''}
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
+                                        <span class="text-primary fw-bold fs-5">${p.price} درهم</span>
+                                        <span class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                                            التفاصيل <i class="fas fa-arrow-left ms-1"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    noResults.style.display = 'block';
+                }
+                
+                // إظهار رسالة للمستخدم
+                const alertHTML = `
+                    <div class="col-12 mb-4">
+                        <div class="alert alert-warning text-center">
+                            <i class="fas fa-info-circle me-2"></i>
+                            جاري عرض عقارات افتراضية. البيانات الحقيقية ستظهر عند اتصال الخادم.
+                        </div>
+                    </div>
+                `;
+                propertiesGrid.insertAdjacentHTML('afterbegin', alertHTML);
+            }
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRegions();
+            startSearch();
+        });
+    </script>
+</body>
+</html>
