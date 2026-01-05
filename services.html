@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="خدمات عمر الصيعري العقارية - وسيط معتمد في الإمارات يقدم خدمات شاملة: شراء، بيع، تأجير، استشارات استثمارية، وتخليص قانوني.">
+    <title>خدماتي كوسيط عقاري | عمر الصيعري - الإمارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-gold: #ffc107;
+            --light-bg: #fafafa;
+        }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background-color: #fafafa;
+            color: #333;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        .service-card { 
+            border-radius: 25px; 
+            border: none; 
+            padding: 40px 30px; 
+            background: white; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            height: 100%; 
+            transition: 0.3s; 
+            border-top: 5px solid transparent;
+        }
+        .service-card:hover { 
+            transform: translateY(-10px); 
+            border-top: 5px solid var(--primary-gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .icon { 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+            display: block; 
+            color: var(--primary-gold);
+            height: 80px;
+            width: 80px;
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+        .nav-link:hover { 
+            color: var(--primary-gold) !important; 
+        }
+        .hero-services {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1920');
+            height: 50vh; 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white;
+        }
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            text-align: center;
+            border-right: 4px solid var(--primary-gold);
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 1.5rem;
+        }
+        .faq-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border-right: 3px solid transparent;
+            transition: 0.3s;
+        }
+        .faq-card:hover {
+            border-right: 3px solid var(--primary-gold);
+        }
+        .contact-promo {
+            background: linear-gradient(135deg, var(--primary-dark), #1e293b);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            color: var(--primary-gold);
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/971509505019" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- الشريط العلوي -->
+    <nav class="navbar navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-black m-0 d-flex align-items-center" href="index.html">
+                <div class="me-2">
+                    <span class="fw-bold fs-4 text-dark">عمر الصيعري</span>
+                    <span class="badge bg-warning text-dark align-middle" style="font-size: 0.6rem; margin-right: 5px;">وسيط معتمد</span>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a class="nav-link text-secondary p-0" href="index.html">الرئيسية</a>
+                <a class="nav-link fw-bold text-dark p-0" href="services.html">خدماتي</a>
+                <a class="nav-link text-secondary p-0" href="properties.html">العقارات</a>
+                <a class="nav-link text-secondary p-0" href="legal.html">التراخيص</a>
+                <a class="btn btn-dark rounded-pill px-4 py-2 fw-bold" href="https://wa.me/971509505019">
+                    <i class="fab fa-whatsapp me-1"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هيرو الصفحة -->
+    <header class="hero-services text-center">
+        <div class="container px-4">
+            <h1 class="display-5 fw-black mb-3">كيف أخدمك في سوق الإمارات العقاري؟</h1>
+            <p class="lead opacity-75 max-w-2xl mx-auto" style="max-width: 700px;">لست مجرد وسيط، بل شريكك الاستراتيجي في رحلة التملك والاستثمار. خبرتي تتيح لك تجربة عقارية سلسة وآمنة.</p>
+            <a href="#contact-section" class="btn btn-warning btn-lg rounded-pill mt-4 px-5 py-3 fw-bold">
+                ابدأ رحلتك العقارية الآن <i class="fas fa-arrow-left ms-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- قسم الخدمات الرئيسية -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">خدماتي الشاملة</h2>
+                <p class="text-secondary">أقدم مجموعة متكاملة من الخدمات المصممة خصيصاً لسوق الإمارات العقاري</p>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <!-- خدمة 1 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">تمثيل المشتري</h4>
+                        <p class="text-secondary">
+                            أبحث لك عن فرص عقارية "خارج السوق" قد لا تجدها بنفسك، مع تحليل جدوى استثماري دقيق لكل عقار.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">بحث في قواعد بيانات خاصة</li>
+                                <li class="mb-2">تحليل جدوى استثماري مفصل</li>
+                                <li class="mb-2">مقارنة أسعار السوق</li>
+                                <li>تفاوض للحصول على أفضل سعر</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خدمة 2 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">تسويق العقارات</h4>
+                        <p class="text-secondary">
+                            إذا كنت تملك عقاراً، أضمن عرضه على شبكة عملاء مختارة وواسعة لبيعه بأسرع وقت وأفضل سعر.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">تصوير احترافي للعقار</li>
+                                <li class="mb-2">عرض على قواعد بيانات المشترين</li>
+                                <li class="mb-2">تسويق عبر وسائل التواصل</li>
+                                <li>تنظيم زيارات وجولات ميدانية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خدمة 3 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">التفاوض الاحترافي</h4>
+                        <p class="text-secondary">
+                            أقوم بدور المفاوض المحترف لضمان حقوقك بالكامل وتخفيض السعر لأقصى حد ممكن لصالحك.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">دراسة العرض والطلبات</li>
+                                <li class="mb-2">استراتيجيات تفاوض مخصصة</li>
+                                <li class="mb-2">حماية مصالح العميل أولاً</li>
+                                <li>ضمان الشروط التعاقدية المناسبة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خدمة 4 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">التخليص القانوني</h4>
+                        <p class="text-secondary">
+                            أتابع معك كافة الإجراءات في دائرة الأراضي والأملاك حتى استلام ملكية العقار رسمياً.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">فحص المستندات القانونية</li>
+                                <li class="mb-2">متابعة إجراءات التسجيل</li>
+                                <li class="mb-2">تنسيق مع المكاتب القانونية</li>
+                                <li>استلام صك الملكية النهائي</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خدمة 5 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">جولات المشاريع</h4>
+                        <p class="text-secondary">
+                            نخرج سوياً في جولات ميدانية لمواقع المشاريع (قيد الإنشاء والتسليم) لأشرح لك تفاصيلها الدقيقة.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">زيارة مواقع المشاريع الجديدة</li>
+                                <li class="mb-2">مقابلة المطورين مباشرة</li>
+                                <li class="mb-2">تحليل جودة البناء والتشطيب</li>
+                                <li>تقييم جدوى المشروع الاستثماري</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- خدمة 6 -->
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">إدارة الممتلكات</h4>
+                        <p class="text-secondary">
+                            بعد الشراء، أتولى تأجير عقارك أو إعادة بيعه لضمان استمرارية العوائد الاستثمارية لك.
+                        </p>
+                        <div class="mt-4">
+                            <ul class="text-start text-muted small ps-3">
+                                <li class="mb-2">إدارة عقاراتك المؤجرة</li>
+                                <li class="mb-2">متابعة تحصيل الإيجارات</li>
+                                <li class="mb-2">صيانة دورية للعقار</li>
+                                <li>إعادة تسويق العقار للبيع لاحقاً</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم خطوات العمل -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">خطوات العمل معي</h2>
+                <p class="text-secondary">رحلة عقارية سهلة وواضحة من البداية حتى النهاية</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h5 class="fw-bold mb-3">التواصل والتشاور</h5>
+                        <p class="text-muted small">نلتقي (وجاهياً أو عن بعد) لفهم احتياجاتك وميزانيتك وتطلعاتك الاستثمارية.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h5 class="fw-bold mb-3">البحث والاختيار</h5>
+                        <p class="text-muted small">أبحث عن الخيارات المناسبة وأعرضها عليك مع تحليل مفصل لكل عقار.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h5 class="fw-bold mb-3">الزيارات والتفاوض</h5>
+                        <p class="text-muted small">نزور العقارات المختارة وأتفاوض على السعر والشروط لصالحك.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h5 class="fw-bold mb-3">الإجراءات والمتابعة</h5>
+                        <p class="text-muted small">أتولى جميع الإجراءات القانونية حتى تسلم صك الملكية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسئلة الشائعة -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">أسئلة شائعة</h2>
+                <p class="text-secondary">إجابات على أكثر الاستفسارات تكراراً من عملائي</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="faq-card">
+                        <h5 class="fw-bold mb-2">ما هي رسوم الخدمات؟</h5>
+                        <p class="text-muted small mb-0">تختلف الرسوم حسب نوع الخدمة والعقار. عادةً تكون نسبة مئوية متفق عليها مسبقاً، ولا توجد رسوم خفية. نناقش كل التفاصيل قبل بدء العمل.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="fw-bold mb-2">كم تستغرق عملية شراء عقار في الإمارات؟</h5>
+                        <p class="text-muted small mb-0">تتراوح بين 2-8 أسابيع حسب نوع العقار والإجراءات القانونية. العقارات الجاهزة أسرع، بينما تحتاج الصفقات المعقدة مزيداً من الوقت.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="fw-bold mb-2">هل يمكنني الشراء كأجنبي في جميع الإمارات؟</h5>
+                        <p class="text-muted small mb-0">نعم، ولكن بضوابط. في المناطق الحرة يمكن للأجنبي التملك بنسبة 100%، وفي المناطق الأخرى تصل إلى 99% مع استثناءات معينة أشرحها لك بالتفصيل.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="fw-bold mb-2">كيف تضمن لي أفضل سعر للعقار؟</h5>
+                        <p class="text-muted small mb-0">بسبب علاقاتي الواسعة مع المطورين والبائعين، بالإضافة إلى مهارات التفاوض، أحصل عادة على أسعار تفضيلية غير متاحة للجمهور العام.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="fw-bold mb-2">ماذا بعد الشراء؟ هل تقدمون خدمة ما بعد البيع؟</h5>
+                        <p class="text-muted small mb-0">نعم، أقدم خدمة متابعة لمدة 3 أشهر مجاناً، وأساعدك في أي استفسارات أو مشكلات، كما يمكنني إدارة عقارك إذا أردت تأجيره.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section id="contact-section" class="py-5">
+        <div class="container">
+            <div class="contact-promo p-5 text-white">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="fw-black mb-3">مستعد لبدء رحلتك العقارية؟</h2>
+                        <p class="opacity-75">اتصل بي الآن للحصول على استشارة مجانية أولية. ناقش احتياجاتك وسأضع بين يديك خطة عمل مخصصة.</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="https://wa.me/971509505019" class="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold" target="_blank">
+                            <i class="fab fa-whatsapp me-2"></i> تواصل عبر واتساب
+                        </a>
+                        <p class="mt-3 small opacity-75">متاح للرد خلال ٣٠ دقيقة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="fw-bold mb-3">عمر الصيعري</h4>
+                    <p class="text-light opacity-75">وسيط عقاري معتمد في دولة الإمارات العربية المتحدة. أقدم خدمات عقارية شاملة مع التركيز على الشفافية والاحترافية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/971509505019" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">الرئيسية</a></li>
+                        <li class="mb-2"><a href="services.html">خدماتي</a></li>
+                        <li class="mb-2"><a href="properties.html">العقارات</a></li>
+                        <li class="mb-2"><a href="legal.html">التراخيص</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+971509505019">+971 50 950 5019</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:omar@property.com">omar@property.com</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span>دبي، الإمارات العربية المتحدة</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3">ساعات العمل</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">السبت - الخميس: 9 صباحاً - 7 مساءً</li>
+                        <li class="mb-2">الجمعة: 2 ظهراً - 7 مساءً</li>
+                        <li class="mb-2">استشارات عن بعد: متاحة 24/7 عبر الواتساب</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light opacity-25 my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 عمر الصيعري. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ترخيص رقم: <span class="text-warning">123456</span> من الهيئة التنظيمية للإمارات</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
