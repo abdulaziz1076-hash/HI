@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="عمر الصيعري - وسيط عقاري معتمد في الإمارات. خبرة في بيع وشراء العقارات السكنية والتجارية في دبي، أبوظبي، الشارقة والعين. مستشارك العقاري الموثوق.">
+    <title>عمر الصيعري | وسيط عقاري معتمد في الإمارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-gold: #ffc107;
+            --light-bg: #fcfcfc;
+        }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            background-color: var(--light-bg);
+            color: #333;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        .hero-personal {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1920');
+            height: 70vh; 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white;
+        }
+        .property-card {
+            border: none; 
+            border-radius: 20px; 
+            overflow: hidden;
+            transition: 0.3s; 
+            cursor: pointer; 
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            height: 100%;
+        }
+        .property-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
+        .nav-link:hover { 
+            color: var(--primary-gold) !important; 
+        }
+        .border-warning-start {
+            border-right: 4px solid var(--primary-gold);
+            padding-right: 1rem;
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-gold);
+            height: 100%;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            color: var(--primary-gold);
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/971509505019" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- الشريط العلوي -->
+    <nav class="navbar navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-black m-0 d-flex align-items-center" href="index.html">
+                <div class="me-2">
+                    <span class="fw-bold fs-4 text-dark">عمر الصيعري</span>
+                    <span class="badge bg-warning text-dark align-middle" style="font-size: 0.6rem; margin-right: 5px;">وسيط معتمد</span>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a class="nav-link fw-bold text-dark p-0" href="index.html">الرئيسية</a>
+                <a class="nav-link text-secondary p-0" href="services.html">خدماتي</a>
+                <a class="nav-link text-secondary p-0" href="properties.html">العقارات</a>
+                <a class="nav-link text-secondary p-0" href="legal.html">التراخيص</a>
+                <a class="btn btn-dark rounded-pill px-4 py-2 fw-bold" href="https://wa.me/971509505019">
+                    <i class="fab fa-whatsapp me-1"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- الهيرو -->
+    <header class="hero-personal text-center">
+        <div class="container px-4">
+            <h1 class="display-4 fw-black mb-3">مستشارك العقاري الخاص <br><span class="text-warning font-italic">في دولة الإمارات</span></h1>
+            <p class="lead opacity-75 max-w-2xl mx-auto" style="max-width: 700px;">أقدم لك خبرتي التي تزيد عن 10 سنوات في سوق العقارات الإماراتي لضمان أفضل استثمار يتناسب مع تطلعاتك المالية والسكنية.</p>
+            <a href="properties.html" class="btn btn-warning btn-lg rounded-pill mt-4 px-5 py-3 fw-bold">
+                تصفح العقارات <i class="fas fa-arrow-left ms-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- قسم نبذة عني -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" 
+                         alt="عمر الصيعري - وسيط عقاري" 
+                         class="profile-img">
+                    <h4 class="mt-3 fw-bold">عمر الصيعري</h4>
+                    <p class="text-muted">وسيط عقاري معتمد</p>
+                    <div class="d-flex justify-content-center mt-2">
+                        <span class="badge bg-light text-dark me-2">ترخيص رقم: 123456</span>
+                        <span class="badge bg-warning text-dark">10+ سنوات خبرة</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="fw-black mb-4 border-warning-start">لماذا تختارني كوسيط عقاري؟</h2>
+                    <p class="lead text-secondary mb-4">
+                        كوسيط عقاري معتمد في دولة الإمارات العربية المتحدة، ألتزم بتقديم خدمة استشارية شاملة وشفافة. 
+                        خبرتي الممتدة في السوق المحلية تمكنني من تقديم رؤى قيّمة وتسهيل عملية البيع أو الشراء بأفضل الشروط.
+                    </p>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>وسيط معتمد</strong> - مرخص من الهيئة التنظيمية</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>تغطية جميع الإمارات</strong> - دبي، أبوظبي، الشارقة، العين</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>شفافية كاملة</strong> - لا رسائل خفية</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>دعم ما بعد البيع</strong> - متابعة مستمرة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات المصغرة -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">خدماتي العقارية</h2>
+                <p class="text-secondary">أقدم مجموعة متكاملة من الخدمات لتغطية جميع احتياجاتك العقارية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h5 class="fw-bold">شراء عقارات</h5>
+                    <p class="text-muted small">ابحث عن منزل أحلامك أو استثمار مربح بمساعدة خبير</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h5 class="fw-bold">بيع عقارات</h5>
+                    <p class="text-muted small">بيع عقارك بأفضل سعر وفي أقصر وقت ممكن</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5 class="fw-bold">استشارات استثمارية</h5>
+                    <p class="text-muted small">تحليل السوق ونصائح استثمارية لتحقيق أقصى عائد</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h5 class="fw-bold">إدارة الممتلكات</h5>
+                    <p class="text-muted small">إدارة وتأجير عقاراتك بنظام احترافي</p>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="services.html" class="btn btn-outline-dark rounded-pill px-4">
+                    اكتشف جميع الخدمات <i class="fas fa-arrow-left ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العقارات المميزة -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h3 class="fw-black m-0 border-warning-start">وحدات اخترتها لك</h3>
+                <a href="properties.html" class="btn btn-link text-dark fw-bold">
+                    عرض الكل <i class="fas fa-arrow-left ms-1"></i>
+                </a>
+            </div>
+            
+            <!-- سبينر التحميل -->
+            <div id="loading-spinner" class="loading-spinner">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">جاري التحميل...</span>
+                </div>
+                <p class="mt-3 text-secondary">جاري تحميل العقارات...</p>
+            </div>
+            
+            <!-- شبكة العقارات -->
+            <div id="properties-grid" class="row g-4">
+                <!-- سيتم ملؤها جافاسكريبت -->
+            </div>
+            
+            <!-- عقارات وهمية احتياطية (تظهر إذا فشل الاتصال بالAPI) -->
+            <div id="fallback-properties" class="row g-4" style="display: none;">
+                <!-- سيتم ملؤها جافاسكريبت عند الحاجة -->
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الشهادات -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">قالوا عني</h2>
+                <p class="text-secondary">ثقة العملاء هي شهادتي الحقيقية في السوق العقاري</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">م</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">محمد آل مكتوم</h6>
+                                <small class="text-muted">مستثمر - دبي</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"ساعدني عمر في العثور على فيلا استثمارية ممتازة في دبي مارينا. محترف وشفاف ويعرف السوق حق المعرفة."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">ف</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">فاطمة النعيمي</h6>
+                                <small class="text-muted">مشترية منزل - أبوظبي</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"تجربة رائعة مع عمر. وجد لي الشقة المثالية لعائلتي في أبوظبي وتابع كل التفاصيل القانونية بنفسه."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">خ</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">خالد القاسمي</h6>
+                                <small class="text-muted">بائع عقار - الشارقة</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"بعت شقتين عبر عمر بسرعة وسعر ممتاز. يتابع مع المشترين بجدية ويوفر عليك الوقت والجهد."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="fw-bold mb-3">عمر الصيعري</h4>
+                    <p class="text-light opacity-75">وسيط عقاري معتمد في دولة الإمارات العربية المتحدة. أقدم خدمات عقارية شاملة مع التركيز على الشفافية والاحترافية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/971509505019" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">الرئيسية</a></li>
+                        <li class="mb-2"><a href="services.html">خدماتي</a></li>
+                        <li class="mb-2"><a href="properties.html">العقارات</a></li>
+                        <li class="mb-2"><a href="legal.html">التراخيص</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+971509505019">+971 50 950 5019</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:omar@property.com">omar@property.com</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span>دبي، الإمارات العربية المتحدة</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3">ساعات العمل</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">السبت - الخميس: 9 صباحاً - 7 مساءً</li>
+                        <li class="mb-2">الجمعة: 2 ظهراً - 7 مساءً</li>
+                        <li class="mb-2">استشارات عن بعد: متاحة 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light opacity-25 my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 عمر الصيعري. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ترخيص رقم: <span class="text-warning">123456</span> من الهيئة التنظيمية للإمارات</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- الجافاسكريبت -->
+    <script>
+        const API_URL = 'https://omar-backend.onrender.com/api/properties';
+        
+        // بيانات وهمية احتياطية
+        const fallbackProperties = [
+            {
+                _id: "1",
+                title: "فيلا فاخرة في دبي مارينا",
+                location: "دبي مارينا",
+                price: "5,200,000",
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1920&auto=format&fit=crop",
+                description: "فيلا حديثة بمساحة 4500 قدم، 4 غرف نوم، مسبح خاص، وإطلالة على المارينا."
+            },
+            {
+                _id: "2",
+                title: "شقة بثلاث غرف في برج خليفة",
+                location: "داون تاون دبي",
+                price: "3,750,000",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1920&auto=format&fit=crop",
+                description: "شقة فاخرة في أرقى أبراج دبي، 3 غرف نوم، إطلالة بانورامية، وتشطيب سوبر لوكس."
+            },
+            {
+                _id: "3",
+                title: "أرض سكنية للاستثمار في الشارقة",
+                location: "الشارقة - المنطقة السكنية",
+                price: "1,850,000",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop",
+                description: "أرض سكنية بمساحة 10000 قدم مربع، موقع استراتيجي، تصريح بناء متوفر."
+            }
+        ];
+
+        // دالة لعرض العقارات
+        function renderProperties(properties, containerId) {
+            const grid = document.getElementById(containerId);
+            grid.innerHTML = properties.map(p => `
+                <div class="col-md-4">
+                    <div class="property-card" onclick="window.location.href='details.html?id=${p._id}'">
+                        <img src="${p.image}" class="w-100" style="height:250px; object-fit:cover;" alt="${p.title}">
+                        <div class="p-4">
+                            <span class="badge bg-light text-dark mb-2">${p.location}</span>
+                            <h5 class="fw-bold my-2 text-dark">${p.title}</h5>
+                            <p class="text-muted small mb-0">${p.description.substring(0, 80)}...</p>
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
+                                <span class="fw-black text-primary fs-5">${p.price} درهم</span>
+                                <span class="small text-secondary">التفاصيل <i class="fas fa-arrow-left ms-1"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // دالة جلب البيانات من API
+        async function fetchProperties() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const mainGrid = document.getElementById('properties-grid');
+            const fallbackGrid = document.getElementById('fallback-properties');
+            
+            // إظهار سبينر التحميل
+            loadingSpinner.style.display = 'block';
+            mainGrid.innerHTML = '';
+            
+            try {
+                const res = await fetch(API_URL);
+                
+                if (!res.ok) throw new Error('فشل الاتصال بالخادم');
+                
+                const data = await res.json();
+                
+                // إخفاء السبينر
+                loadingSpinner.style.display = 'none';
+                
+                // إذا كانت هناك بيانات، عرضها
+                if (data && data.length > 0) {
+                    renderProperties(data, 'properties-grid');
+                } else {
+                    // إذا كانت البيانات فارغة، عرض البدائل
+                    renderProperties(fallbackProperties, 'properties-grid');
+                }
+            } catch (e) {
+                console.warn("فشل الاتصال بالخادم، جاري عرض عقارات افتراضية:", e.message);
+                
+                // إخفاء السبينر وإظهار البدائل
+                loadingSpinner.style.display = 'none';
+                renderProperties(fallbackProperties, 'properties-grid');
+                
+                // إظهار رسالة للمستخدم
+                const alertHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-warning text-center">
+                            <i class="fas fa-info-circle me-2"></i>
+                            جاري عرض عقارات افتراضية. البيانات الحقيقية ستظهر عند اتصال الخادم.
+                        </div>
+                    </div>
+                `;
+                mainGrid.insertAdjacentHTML('afterbegin', alertHTML);
+            }
+        }
+
+        // تحميل العقارات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', fetchProperties);
+    </script>
+</body>
+</html>
