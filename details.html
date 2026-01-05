@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تفاصيل العقار - شقة فاخرة في برج خليفة بوسط دبي، 3 غرف نوم، إطلالة بانورامية، تشطيب سوبر لوكس">
+    <title>تفاصيل العقار | عمر الصيعري - عقارات الإمارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-gold: #ffc107;
+            --primary-blue: #0ea5e9;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        
+        /* شريط التنقل */
+        .navbar-brand span {
+            font-size: 0.65rem;
+            margin-right: 5px;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-gold) !important;
+        }
+        
+        /* معرض الصور */
+        .main-image {
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.01);
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .thumbnail {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--primary-gold);
+            transform: translateY(-3px);
+        }
+        
+        /* بطاقة المعلومات */
+        .property-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1e293b 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .property-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, transparent 70%);
+        }
+        
+        .property-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-gold);
+            color: black;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+        
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            text-shadow: 0 2px 10px rgba(255, 193, 7, 0.2);
+        }
+        
+        /* بطاقة المواصفات */
+        .specs-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            border-top: 5px solid var(--primary-blue);
+            transition: transform 0.3s;
+        }
+        
+        .specs-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .spec-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+        }
+        
+        /* قائمة المميزات */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-item {
+            background: #f8fafc;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border-right: 4px solid var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transform: translateX(-5px);
+        }
+        
+        .feature-item i {
+            color: var(--primary-gold);
+        }
+        
+        /* الخريطة */
+        .map-container {
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .map-placeholder {
+            height: 100%;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+        }
+        
+        /* نموذج الاستفسار */
+        .inquiry-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 12px;
+            padding: 12px 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+        }
+        
+        /* بطاقة الوسيط */
+        .agent-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 5px solid var(--primary-gold);
+        }
+        
+        .agent-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 auto 1.5rem;
+        }
+        
+        /* العقارات المشابهة */
+        .similar-property {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .similar-property:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* زر الواتساب العائم */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        
+        /* الفوتر */
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer a:hover {
+            color: var(--primary-gold);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+        
+        /* أزرار المشاركة */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+        
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .share-btn.whatsapp { background: #25D366; }
+        .share-btn.facebook { background: #1877F2; }
+        .share-btn.twitter { background: #1DA1F2; }
+        .share-btn.link { background: var(--primary-dark); }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        /* التبويبات */
+        .nav-tabs {
+            border: none;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            color: #64748b;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 15px;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: var(--primary-gold);
+            color: black;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+        }
+        
+        .nav-tabs .nav-link:hover:not(.active) {
+            background: #f1f5f9;
+            color: var(--primary-dark);
+        }
+        
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            .main-image {
+                height: 300px;
+            }
+            
+            .price-tag {
+                font-size: 2rem;
+            }
+            
+            .property-header {
+                padding: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/971509505019" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- الشريط العلوي -->
+    <nav class="navbar navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold m-0 d-flex align-items-center" href="index.html">
+                <div class="me-2">
+                    <span class="fw-bold fs-4 text-dark">عمر الصيعري</span>
+                    <span class="badge bg-warning text-dark align-middle" style="font-size: 0.6rem; margin-right: 5px;">وسيط معتمد</span>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a class="nav-link text-secondary p-0" href="index.html">الرئيسية</a>
+                <a class="nav-link text-secondary p-0" href="services.html">خدماتي</a>
+                <a class="nav-link text-secondary p-0" href="properties.html">العقارات</a>
+                <a class="nav-link text-secondary p-0" href="legal.html">التراخيص</a>
+                <a class="btn btn-dark rounded-pill px-4 py-2 fw-bold" href="https://wa.me/971509505019">
+                    <i class="fab fa-whatsapp me-1"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container py-5">
+        <!-- مسار التنقل -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="text-dark"><i class="fas fa-home me-1"></i> الرئيسية</a></li>
+                <li class="breadcrumb-item"><a href="properties.html" class="text-dark">العقارات</a></li>
+                <li class="breadcrumb-item active" aria-current="page">تفاصيل العقار</li>
+            </ol>
+        </nav>
+
+        <!-- رأس العقار -->
+        <div class="property-header">
+            <div class="property-badge">عرض خاص</div>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-6 fw-bold mb-3">شقة فاخرة في برج خليفة - دبي</h1>
+                    <div class="d-flex align-items-center flex-wrap gap-3 mb-4">
+                        <span class="badge bg-light text-dark fs-6 p-2"><i class="fas fa-map-marker-alt me-2 text-warning"></i> دبي - وسط المدينة</span>
+                        <span class="badge bg-light text-dark fs-6 p-2"><i class="fas fa-building me-2 text-warning"></i> برج سكني</span>
+                        <span class="badge bg-light text-dark fs-6 p-2"><i class="fas fa-calendar me-2 text-warning"></i> سنة البناء: 2021</span>
+                    </div>
+                    <p class="lead opacity-75 mb-4">
+                        شقة استثنائية في أرقى أبراج العالم، تشطيب سوبر لوكس، إطلالة بانورامية على مدينة دبي، وتصميم عصري يجمع بين الفخامة والراحة.
+                    </p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="price-tag">3,750,000 درهم</div>
+                    <p class="text-light opacity-75 mt-2">للبيع • السعر شامل الرسوم الحكومية</p>
+                    <div class="share-buttons justify-content-center">
+                        <a href="https://wa.me/?text=تفضل_بزيارة_هذا_العقار:_https://omarsayeghy.com/property/123" class="share-btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://omarsayeghy.com/property/123" class="share-btn facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?text=عقار_رائع_للبيع_في_دبي&url=https://omarsayeghy.com/property/123" class="share-btn twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <button class="share-btn link" onclick="copyLink()" title="نسخ الرابط">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الصور والتفاصيل -->
+        <div class="row g-4">
+            <!-- معرض الصور -->
+            <div class="col-lg-8">
+                <div class="bg-white rounded-4 shadow-sm p-4">
+                    <img id="mainImage" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1920&auto=format&fit=crop" 
+                         class="main-image w-100" alt="شقة فاخرة في برج خليفة">
+                    
+                    <div class="thumbnail-container">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail active" onclick="changeImage(this)" alt="الصالة الرئيسية">
+                        <img src="https://images.unsplash.com/photo-1616587894289-86480e533129?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail" onclick="changeImage(this)" alt="غرفة النوم الرئيسية">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail" onclick="changeImage(this)" alt="المطبخ الفاخر">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail" onclick="changeImage(this)" alt="الحمام الفاخر">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail" onclick="changeImage(this)" alt="الإطلالة من الشرفة">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1920&auto=format&fit=crop" 
+                             class="thumbnail" onclick="changeImage(this)" alt="مرافق البناية">
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h4 class="fw-bold mb-3">عن هذا العقار</h4>
+                        <p class="lead">
+                            تتكون هذه الشقة الفاخرة من 3 غرف نوم و3 حمامات بمساحة إجمالية 1800 قدم مربع. 
+                            تتميز بتشطيب سوبر لوكس من شركة إيطالية مرموقة، أرضيات من الرخام الإيطالي، 
+                            وتجهيزات مطبخ ألمانية عالية الجودة.
+                        </p>
+                        <p>
+                            تقع الشقة في الطابق 75 من برج خليفة، مما يوفر إطلالة بانورامية لا مثيل لها 
+                            على أفق دبي ونافورة دبي. البناية توفر مرافق عالمية المستوى تشمل صالة رياضية، 
+                            مسبح داخلي وخارجي، سبا، وأمن على مدار الساعة.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- التبويبات التفصيلية -->
+                <div class="mt-4">
+                    <ul class="nav nav-tabs" id="propertyTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="features-tab" data-bs-toggle="tab" data-bs-target="#features" type="button" role="tab">
+                                <i class="fas fa-star me-2"></i> المميزات
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">
+                                <i class="fas fa-ruler-combined me-2"></i> المواصفات
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab">
+                                <i class="fas fa-map-marked-alt me-2"></i> الموقع
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content bg-white rounded-4 shadow-sm p-4" id="propertyTabContent">
+                        <!-- المميزات -->
+                        <div class="tab-pane fade show active" id="features" role="tabpanel">
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <i class="fas fa-swimming-pool"></i>
+                                    <span>مسبح داخلي وخارجي</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-dumbbell"></i>
+                                    <span>صالة رياضية مجهزة</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-spa"></i>
+                                    <span>مركز سبا وعلاج طبيعي</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>نظام أمن متكامل 24/7</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-car"></i>
+                                    <span>مواقف سيارات خاصة</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>خدمات كونسيرج</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-wifi"></i>
+                                    <span>إنترنت فايبر ضوئي</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-snowflake"></i>
+                                    <span>تكييف مركزي</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-tshirt"></i>
+                                    <span>غرفة غسيل منفصلة</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-tv"></i>
+                                    <span>تلفزيون ذكي في كل غرفة</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المواصفات -->
+                        <div class="tab-pane fade" id="specs" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="specs-card">
+                                        <div class="spec-icon">
+                                            <i class="fas fa-bed"></i>
+                                        </div>
+                                        <h5 class="fw-bold">3 غرف نوم</h5>
+                                        <p class="text-muted">غرفة نوم رئيسية واسعة + غرفتين نوم ضيوف</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="specs-card">
+                                        <div class="spec-icon">
+                                            <i class="fas fa-bath"></i>
+                                        </div>
+                                        <h5 class="fw-bold">3 حمامات</h5>
+                                        <p class="text-muted">حمام رئيسي جاكوزي + حمامين للضيوف</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="specs-card">
+                                        <div class="spec-icon">
+                                            <i class="fas fa-expand-arrows-alt"></i>
+                                        </div>
+                                        <h5 class="fw-bold">1,800 قدم مربع</h5>
+                                        <p class="text-muted">مساحة إجمالية (167 متر مربع)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="specs-card">
+                                        <div class="spec-icon">
+                                            <i class="fas fa-layer-group"></i>
+                                        </div>
+                                        <h5 class="fw-bold">الطابق 75</h5>
+                                        <p class="text-muted">إطلالة بانورامية على مدينة دبي</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الموقع -->
+                        <div class="tab-pane fade" id="location" role="tabpanel">
+                            <h5 class="fw-bold mb-3">موقع مميز في قلب دبي</h5>
+                            <p class="mb-4">
+                                يقع العقار في وسط المدينة، على بعد دقائق من:
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> دبي مول - 5 دقائق سيراً</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> برج خليفة - في نفس البناية</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> نافورة دبي - إطلالة مباشرة</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> محطة مترو - 3 دقائق سيراً</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i> مستشفى الأمريكي - 10 دقائق</li>
+                            </ul>
+                            
+                            <div class="map-container mt-4">
+                                <div class="map-placeholder">
+                                    <div class="text-center">
+                                        <i class="fas fa-map-marked-alt fa-2x mb-3"></i>
+                                        <p>خريطة تفاعلية للموقع</p>
+                                        <small class="text-muted">إحداثيات: 25.1972° N, 55.2744° E</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الجانب الأيمن - الاستفسار والوسيط -->
+            <div class="col-lg-4">
+                <!-- نموذج الاستفسار -->
+                <div class="inquiry-form sticky-top" style="top: 100px;">
+                    <h4 class="fw-bold mb-4 text-center">استفسر عن هذا العقار</h4>
+                    
+                    <div class="alert alert-success d-none" id="successMessage">
+                        <i class="fas fa-check-circle me-2"></i>
+                        تم إرسال استفسارك بنجاح! سنتواصل معك قريباً.
+                    </div>
+                    
+                    <form id="propertyInquiryForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">الاسم الكامل</label>
+                            <input type="text" class="form-control" placeholder="أدخل اسمك" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">رقم الهاتف</label>
+                            <input type="tel" class="form-control" placeholder="مثال: 0501234567" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" placeholder="example@email.com">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">نوع الاستفسار</label>
+                            <select class="form-select">
+                                <option value="visit">طلب زيارة العقار</option>
+                                <option value="price">استفسار عن السعر</option>
+                                <option value="finance">استفسار عن التمويل</option>
+                                <option value="other">استفسار آخر</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">الرسالة</label>
+                            <textarea class="form-control" rows="4" placeholder="اكتب رسالتك هنا...">أرغب في الاستفسار عن شقة برج خليفة</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-warning w-100 py-3 fw-bold rounded-pill">
+                            <i class="fas fa-paper-plane me-2"></i> إرسال الاستفسار
+                        </button>
+                        
+                        <p class="text-center text-muted small mt-3">
+                            أو تواصل مباشرة عبر
+                            <a href="https://wa.me/971509505019" class="text-dark fw-bold">الواتساب</a>
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- بطاقة الوسيط -->
+                <div class="agent-card mt-4">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" 
+                         class="agent-image" alt="عمر الصيعري">
+                    <h5 class="fw-bold mb-2">عمر الصيعري</h5>
+                    <p class="text-muted mb-3">وسيط عقاري معتمد</p>
+                    
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <div class="text-center">
+                            <div class="fs-4 fw-bold text-warning">12+</div>
+                            <div class="small text-muted">سنوات خبرة</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="fs-4 fw-bold text-warning">250+</div>
+                            <div class="small text-muted">صفقة ناجحة</div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="tel:+971509505019" class="btn btn-outline-dark rounded-pill">
+                            <i class="fas fa-phone me-2"></i> +971 50 950 5019
+                        </a>
+                        <a href="https://wa.me/971509505019" class="btn btn-success rounded-pill">
+                            <i class="fab fa-whatsapp me-2"></i> تواصل عبر واتساب
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- معلومات مالية -->
+                <div class="bg-white rounded-4 shadow-sm p-4 mt-4">
+                    <h5 class="fw-bold mb-3">الحسابات المالية</h5>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="text-muted">سعر العقار:</td>
+                                <td class="fw-bold text-end">3,750,000 درهم</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">الرسوم الحكومية:</td>
+                                <td class="fw-bold text-end text-success">مشمولة</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">رسوم الوكالة:</td>
+                                <td class="fw-bold text-end">2%</td>
+                            </tr>
+                            <tr class="border-top">
+                                <td class="text-muted">السعر الإجمالي:</td>
+                                <td class="fw-bold text-end fs-5">3,825,000 درهم</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        يمكن تمويل العقار بنسبة تصل إلى 75% عبر بنوك محلية.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- العقارات المشابهة -->
+        <div class="mt-5">
+            <h3 class="fw-bold mb-4">عقارات مشابهة قد تعجبك</h3>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="similar-property">
+                        <img src="https://images.unsplash.com/photo-1616587894289-86480e533129?q=80&w=1920&auto=format&fit=crop" 
+                             class="w-100" style="height:200px; object-fit:cover;" alt="فيلا في دبي مارينا">
+                        <div class="p-3">
+                            <h6 class="fw-bold mb-2">فيلا في دبي مارينا</h6>
+                            <p class="text-muted small mb-2">4 غرف • 5 حمامات • 4500 قدم</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">5,200,000 درهم</span>
+                                <a href="#" class="btn btn-sm btn-outline-dark">التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="similar-property">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1920&auto=format&fit=crop" 
+                             class="w-100" style="height:200px; object-fit:cover;" alt="شقة في أبوظبي">
+                        <div class="p-3">
+                            <h6 class="fw-bold mb-2">شقة في أبوظبي</h6>
+                            <p class="text-muted small mb-2">3 غرف • 3 حمامات • 1600 قدم</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">2,850,000 درهم</span>
+                                <a href="#" class="btn btn-sm btn-outline-dark">التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="similar-property">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1920&auto=format&fit=crop" 
+                             class="w-100" style="height:200px; object-fit:cover;" alt="مكتب في دبي">
+                        <div class="p-3">
+                            <h6 class="fw-bold mb-2">مكتب تجاري في دبي</h6>
+                            <p class="text-muted small mb-2">1200 قدم • منطقة حرة</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-primary">1,900,000 درهم</span>
+                                <a href="#" class="btn btn-sm btn-outline-dark">التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="fw-bold mb-3">عمر الصيعري</h4>
+                    <p class="text-light opacity-75">وسيط عقاري معتمد في دولة الإمارات العربية المتحدة. أقدم خدمات عقارية شاملة مع التركيز على الشفافية والاحترافية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/971509505019" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">الرئيسية</a></li>
+                        <li class="mb-2"><a href="services.html">خدماتي</a></li>
+                        <li class="mb-2"><a href="properties.html">العقارات</a></li>
+                        <li class="mb-2"><a href="legal.html">التراخيص</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+971509505019">+971 50 950 5019</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:omar@property.com">omar@property.com</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span>دبي، الإمارات العربية المتحدة</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3">ساعات العمل</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">السبت - الخميس: 9 صباحاً - 7 مساءً</li>
+                        <li class="mb-2">الجمعة: 2 ظهراً - 7 مساءً</li>
+                        <li class="mb-2">استشارات عقارية: متاحة 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light opacity-25 my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 عمر الصيعري. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ترخيص رقم: <span class="text-warning">123456</span> من الهيئة التنظيمية للإمارات</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تغيير الصورة الرئيسية
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = element.src;
+            
+            // إزالة النشاط من جميع الصور المصغرة
+            document.querySelectorAll('.thumbnail').forEach(img => {
+                img.classList.remove('active');
+            });
+            
+            // إضافة النشاط للصورة المحددة
+            element.classList.add('active');
+        }
+        
+        // نسخ رابط العقار
+        function copyLink() {
+            const link = window.location.href;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('تم نسخ رابط العقار!');
+            });
+        }
+        
+        // معالجة نموذج الاستفسار
+        document.getElementById('propertyInquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // هنا يمكنك إضافة كود إرسال النموذج إلى الخادم
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.remove('d-none');
+            
+            // إخفاء الرسالة بعد 5 ثواني
+            setTimeout(() => {
+                successMessage.classList.add('d-none');
+            }, 5000);
+            
+            // إعادة تعيين النموذج
+            this.reset();
+        });
+        
+        // التمرير السلس للتبويبات
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // محاكاة تحميل الصفحة مع بيانات العقار
+        window.addEventListener('DOMContentLoaded', function() {
+            // يمكن هنا إضافة كود لجلب بيانات العقار من API
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+            
+            if(propertyId) {
+                console.log(`جاري تحميل بيانات العقار رقم: ${propertyId}`);
+                // هنا يمكنك جلب البيانات من API وعرضها
+            }
+        });
+    </script>
+</body>
+</html>
