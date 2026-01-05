@@ -3,738 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة العقارات والحسابات - النسخة النهائية + الحذف</title>
-    
+    <meta name="description" content="عمر الصيعري - وسيط عقاري معتمد في الإمارات. خبرة في بيع وشراء العقارات السكنية والتجارية في دبي، أبوظبي، الشارقة والعين. مستشارك العقاري الموثوق.">
+    <title>عمر الصيعري | وسيط عقاري معتمد في الإمارات</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ==================================== */
-        /* CSS: الألوان والتنسيق النهائي */
-        /* ==================================== */
         :root {
-            --primary-color: #007bff; 
-            --secondary-color: #6c757d; 
-            --success-color: #28a745; 
-            --danger-color: #dc3545; 
-            --bg-light: #f8f9fa; 
-            --text-dark: #343a40; 
+            --primary-dark: #0f172a;
+            --primary-gold: #ffc107;
+            --light-bg: #fcfcfc;
         }
-        
         body { 
-            font-family: 'Tahoma', 'Arial', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Tajawal', sans-serif; 
+            background-color: var(--light-bg);
+            color: #333;
+            padding-top: 0;
+            margin-top: 0;
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 12px;
-        }
-        h1, h2, h3 { 
-            color: var(--primary-color); 
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-        nav {
-            background-color: var(--primary-color);
-            padding: 10px 0;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        nav a { 
-            margin: 0 15px; 
-            text-decoration: none; 
-            color: white; 
-            font-weight: bold;
-            padding: 8px 12px;
-            transition: background-color 0.3s, border-radius 0.3s;
-        }
-        nav a:hover, nav a.active-link {
-            background-color: #0056b3;
-            border-radius: 6px;
-        }
-
-        /* الجداول */
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
-            font-size: 14px;
-        }
-        th, td { 
-            border: 1px solid #dee2e6; 
-            padding: 12px; 
-            text-align: right; 
-        }
-        th { 
-            background-color: var(--bg-light); 
-            color: var(--text-dark);
-            font-weight: bold;
-        }
-        tr:nth-child(even) { background-color: #f8f9fa; }
-        .deposit { color: var(--success-color); font-weight: bold; }
-        .expense { color: var(--danger-color); font-weight: bold; }
-        .tab-content { display: none; padding-top: 20px; }
-        .active { display: block; }
-        
-        /* الملخص */
-        #summary-data { display: flex; justify-content: space-between; gap: 20px; }
-        #summary-data p {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 5px;
-            flex-grow: 1;
-            border-right: 5px solid var(--primary-color);
-            white-space: nowrap;
-        }
-
-        /* الأزرار العامة */
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .hero-personal {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1920');
+            height: 70vh; 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
             color: white;
-            font-weight: bold;
         }
-        .btn-edit { background-color: #ffc107; color: var(--text-dark); margin-right: 5px; }
-        .btn-edit:hover { background-color: #e0a800; }
-        .btn-delete { background-color: var(--danger-color); color: white; margin-right: 5px; }
-        .btn-delete:hover { background-color: #c82333; }
-        .action-cell { white-space: nowrap; }
-
-        /* النموذج المنبثق (Modal) */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 100; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 60px;
+        .property-card {
+            border: none; 
+            border-radius: 20px; 
+            overflow: hidden;
+            transition: 0.3s; 
+            cursor: pointer; 
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            height: 100%;
         }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            text-align: right;
+        .property-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
         }
-        .close {
-            color: #aaa;
-            float: left;
-            font-size: 28px;
-            font-weight: bold;
+        .nav-link:hover { 
+            color: var(--primary-gold) !important; 
         }
-        .close:hover,
-        .close:focus {
-            color: #000;
+        .border-warning-start {
+            border-right: 4px solid var(--primary-gold);
+            padding-right: 1rem;
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-gold);
+            height: 100%;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        .footer a {
+            color: #ccc;
             text-decoration: none;
-            cursor: pointer;
+            transition: 0.3s;
         }
-        .modal-content label { display: inline-block; width: 120px; margin-top: 10px; }
-        .modal-content input, .modal-content select { 
-            width: 65%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        .footer a:hover {
+            color: var(--primary-gold);
         }
-
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/971509505019" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-<div class="container">
-    <h1>نظام متابعة إيجارات ومصروفات العقارات (25 شقة)</h1>
-
-    <nav id="main-nav">
-        <a href="#dashboard" class="active-link" onclick="showTab('dashboard', this)">الرئيسية/الملخص</a>
-        <a href="#transactions" onclick="showTab('transactions', this)">إدخال العمليات</a>
-        <a href="#statements" onclick="showTab('statements', this)">كشوفات الحركة</a>
-        <a href="#reports" onclick="showTab('reports', this)">التقارير الاحترافية</a>
+    <!-- الشريط العلوي -->
+    <nav class="navbar navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-black m-0 d-flex align-items-center" href="index.html">
+                <div class="me-2">
+                    <span class="fw-bold fs-4 text-dark">عمر الصيعري</span>
+                    <span class="badge bg-warning text-dark align-middle" style="font-size: 0.6rem; margin-right: 5px;">وسيط معتمد</span>
+                </div>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a class="nav-link fw-bold text-dark p-0" href="index.html">الرئيسية</a>
+                <a class="nav-link text-secondary p-0" href="services.html">خدماتي</a>
+                <a class="nav-link text-secondary p-0" href="properties.html">العقارات</a>
+                <a class="nav-link text-secondary p-0" href="legal.html">التراخيص</a>
+                <a class="btn btn-dark rounded-pill px-4 py-2 fw-bold" href="https://wa.me/971509505019">
+                    <i class="fab fa-whatsapp me-1"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
     </nav>
 
-    <section id="dashboard" class="tab-content active">
-        <h2>ملخص الأداء المالي</h2>
-        <div id="summary-data">
-            <p><strong>إجمالي الإيرادات:</strong> <span id="total-deposits">0.00</span> ريال</p>
-            <p><strong>إجمالي المصروفات:</strong> <span id="total-expenses">0.00</span> ريال</p>
-            <p><strong>صافي الدخل (الرصيد):</strong> <span id="net-income">0.00</span> ريال</p>
+    <!-- الهيرو -->
+    <header class="hero-personal text-center">
+        <div class="container px-4">
+            <h1 class="display-4 fw-black mb-3">مستشارك العقاري الخاص <br><span class="text-warning font-italic">في دولة الإمارات</span></h1>
+            <p class="lead opacity-75 max-w-2xl mx-auto" style="max-width: 700px;">أقدم لك خبرتي التي تزيد عن 10 سنوات في سوق العقارات الإماراتي لضمان أفضل استثمار يتناسب مع تطلعاتك المالية والسكنية.</p>
+            <a href="properties.html" class="btn btn-warning btn-lg rounded-pill mt-4 px-5 py-3 fw-bold">
+                تصفح العقارات <i class="fas fa-arrow-left ms-2"></i>
+            </a>
         </div>
-        <h3 style="margin-top: 40px;">ملاحظات هامة</h3>
-        <p>🔴 **تذكير:** البيانات مخزنة محلياً في متصفحك. استخدم نفس المتصفح والجهاز لتجنب ضياعها. يرجى **عدم** استخدام وضع التصفح الخفي (Incognito Mode).</p>
+    </header>
+
+    <!-- قسم نبذة عني -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" 
+                         alt="عمر الصيعري - وسيط عقاري" 
+                         class="profile-img">
+                    <h4 class="mt-3 fw-bold">عمر الصيعري</h4>
+                    <p class="text-muted">وسيط عقاري معتمد</p>
+                    <div class="d-flex justify-content-center mt-2">
+                        <span class="badge bg-light text-dark me-2">ترخيص رقم: 123456</span>
+                        <span class="badge bg-warning text-dark">10+ سنوات خبرة</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="fw-black mb-4 border-warning-start">لماذا تختارني كوسيط عقاري؟</h2>
+                    <p class="lead text-secondary mb-4">
+                        كوسيط عقاري معتمد في دولة الإمارات العربية المتحدة، ألتزم بتقديم خدمة استشارية شاملة وشفافة. 
+                        خبرتي الممتدة في السوق المحلية تمكنني من تقديم رؤى قيّمة وتسهيل عملية البيع أو الشراء بأفضل الشروط.
+                    </p>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>وسيط معتمد</strong> - مرخص من الهيئة التنظيمية</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>تغطية جميع الإمارات</strong> - دبي، أبوظبي، الشارقة، العين</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>شفافية كاملة</strong> - لا رسائل خفية</p>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <p><i class="fas fa-check-circle text-warning me-2"></i> <strong>دعم ما بعد البيع</strong> - متابعة مستمرة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="transactions" class="tab-content">
-        <h2>إدخال عملية مالية جديدة</h2>
-        <h3>إدخال إيداع (إيجار) 💰</h3>
-        <form id="deposit-form">
-            <label for="dep-date">التاريخ:</label>
-            <input type="date" id="dep-date" required><br>
-
-            <label for="dep-amount">المبلغ المدفوع:</label>
-            <input type="number" id="dep-amount" min="1" required><br>
-            
-            <label for="dep-payment-method">طريقة الدفع:</label>
-            <select id="dep-payment-method" required>
-                <option value="نقدي">نقدي (Cash)</option>
-                <option value="بنكي">تحويل بنكي (Bank Transfer)</option>
-            </select><br>
-
-            <label for="dep-building">العقار (المبنى):</label>
-            <select id="dep-building" onchange="populateUnits()" required>
-                <option value="">-- اختر العقار --</option>
-                <option value="الفيلا والمبنى الرئيسي">الفيلا والمبنى الرئيسي (شقق 1-14)</option>
-                <option value="المجلس 101">المجلس 101 (شقق 15-21)</option>
-                <option value="المجلس 102">المجلس 102 (شقق 22-25)</option>
-            </select><br>
-
-            <label for="dep-unit">رقم الشقة/الوحدة:</label>
-            <select id="dep-unit" required disabled>
-                <option value="">-- اختر شقة --</option>
-            </select><br>
-
-            <label for="dep-desc">ملاحظات/الشهر:</label>
-            <input type="text" id="dep-desc" placeholder="مثال: إيجار شهر أكتوبر 2025"><br>
-
-            <button type="submit" style="background-color: var(--success-color);">تسجيل الإيداع</button>
-        </form>
-
-        <hr style="margin: 30px 0;">
-
-        <h3>إدخال مصروف 💸</h3>
-        <form id="expense-form">
-            <label for="exp-date">التاريخ:</label>
-            <input type="date" id="exp-date" required><br>
-
-            <label for="exp-amount">المبلغ:</label>
-            <input type="number" id="exp-amount" min="1" required><br>
-
-            <label for="exp-type">نوع المصروف:</label>
-            <select id="exp-type" required>
-                <option value="صيانة">صيانة</option>
-                <option value="فواتير">فواتير (كهرباء/ماء)</option>
-                <option value="أجور">أجور حارس/إدارة</option>
-                <option value="أخرى">أخرى</option>
-            </select><br>
-
-            <label for="exp-desc">الوصف:</label>
-            <input type="text" id="exp-desc" required placeholder="مثال: فاتورة كهرباء الفيلا"><br>
-
-            <button type="submit" style="background-color: var(--danger-color);">تسجيل المصروف</button>
-        </form>
+    <!-- قسم الخدمات المصغرة -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">خدماتي العقارية</h2>
+                <p class="text-secondary">أقدم مجموعة متكاملة من الخدمات لتغطية جميع احتياجاتك العقارية</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h5 class="fw-bold">شراء عقارات</h5>
+                    <p class="text-muted small">ابحث عن منزل أحلامك أو استثمار مربح بمساعدة خبير</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h5 class="fw-bold">بيع عقارات</h5>
+                    <p class="text-muted small">بيع عقارك بأفضل سعر وفي أقصر وقت ممكن</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5 class="fw-bold">استشارات استثمارية</h5>
+                    <p class="text-muted small">تحليل السوق ونصائح استثمارية لتحقيق أقصى عائد</p>
+                </div>
+                <div class="col-md-3 col-6 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h5 class="fw-bold">إدارة الممتلكات</h5>
+                    <p class="text-muted small">إدارة وتأجير عقاراتك بنظام احترافي</p>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="services.html" class="btn btn-outline-dark rounded-pill px-4">
+                    اكتشف جميع الخدمات <i class="fas fa-arrow-left ms-2"></i>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section id="statements" class="tab-content">
-        <h2>كشف الحركة المالية التفصيلي</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>التاريخ</th>
-                    <th>النوع</th>
-                    <th>المبنى</th>
-                    <th>الوحدة/التصنيف</th>
-                    <th>طريقة الدفع</th>
-                    <th>الإيداع (+)</th>
-                    <th>المصروف (-)</th>
-                    <th>الرصيد</th>
-                    <th>إجراء</th>
-                </tr>
-            </thead>
-            <tbody id="transactions-table-body">
-                <tr><td colspan="9" style="text-align: center;">لا توجد حركات مسجلة بعد.</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section id="reports" class="tab-content">
-        <h2>التقارير الاحترافية</h2>
-        
-        <div class="report-controls">
-            <label for="report-type">نوع التقرير:</label>
-            <select id="report-type" onchange="toggleReportFilters()">
-                <option value="annual">تقرير سنوي/شهري إجمالي</option>
-                <option value="building">تقرير حسب العقار</option>
-            </select>
-            
-            <div id="filter-building" style="margin-top: 15px; display: none;">
-                <label for="report-building-select">اختيار العقار:</label>
-                <select id="report-building-select">
-                    <option value="الكل">الكل</option>
-                    <option value="الفيلا والمبنى الرئيسي">الفيلا والمبنى الرئيسي</option>
-                    <option value="المجلس 101">المجلس 101</option>
-                    <option value="المجلس 102">المجلس 102</option>
-                </select>
+    <!-- قسم العقارات المميزة -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h3 class="fw-black m-0 border-warning-start">وحدات اخترتها لك</h3>
+                <a href="properties.html" class="btn btn-link text-dark fw-bold">
+                    عرض الكل <i class="fas fa-arrow-left ms-1"></i>
+                </a>
             </div>
             
-            <button onclick="generateReport()" style="margin-right: 20px; background-color: #17a2b8;">توليد التقرير</button>
-            <button onclick="printReport()" style="background-color: var(--secondary-color);">طباعة التقرير</button>
-        </div>
-
-        <h3 id="report-title">نتائج التقرير</h3>
-        <div id="report-output">
-            <p style="color: var(--secondary-color);">اختر نوع التقرير واضغط "توليد التقرير" لعرض البيانات.</p>
+            <!-- سبينر التحميل -->
+            <div id="loading-spinner" class="loading-spinner">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">جاري التحميل...</span>
+                </div>
+                <p class="mt-3 text-secondary">جاري تحميل العقارات...</p>
+            </div>
+            
+            <!-- شبكة العقارات -->
+            <div id="properties-grid" class="row g-4">
+                <!-- سيتم ملؤها جافاسكريبت -->
+            </div>
+            
+            <!-- عقارات وهمية احتياطية (تظهر إذا فشل الاتصال بالAPI) -->
+            <div id="fallback-properties" class="row g-4" style="display: none;">
+                <!-- سيتم ملؤها جافاسكريبت عند الحاجة -->
+            </div>
         </div>
     </section>
 
-</div> <div id="editModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>تعديل العملية المالية</h2>
-        <form id="edit-form">
-            <input type="hidden" id="edit-id">
+    <!-- قسم الشهادات -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-black mb-3">قالوا عني</h2>
+                <p class="text-secondary">ثقة العملاء هي شهادتي الحقيقية في السوق العقاري</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">م</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">محمد آل مكتوم</h6>
+                                <small class="text-muted">مستثمر - دبي</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"ساعدني عمر في العثور على فيلا استثمارية ممتازة في دبي مارينا. محترف وشفاف ويعرف السوق حق المعرفة."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">ف</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">فاطمة النعيمي</h6>
+                                <small class="text-muted">مشترية منزل - أبوظبي</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"تجربة رائعة مع عمر. وجد لي الشقة المثالية لعائلتي في أبوظبي وتابع كل التفاصيل القانونية بنفسه."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="fw-bold text-white">خ</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="fw-bold mb-0">خالد القاسمي</h6>
+                                <small class="text-muted">بائع عقار - الشارقة</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"بعت شقتين عبر عمر بسرعة وسعر ممتاز. يتابع مع المشترين بجدية ويوفر عليك الوقت والجهد."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <label for="edit-date">التاريخ:</label>
-            <input type="date" id="edit-date" required><br>
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="fw-bold mb-3">عمر الصيعري</h4>
+                    <p class="text-light opacity-75">وسيط عقاري معتمد في دولة الإمارات العربية المتحدة. أقدم خدمات عقارية شاملة مع التركيز على الشفافية والاحترافية.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/971509505019" class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">روابط سريعة</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html">الرئيسية</a></li>
+                        <li class="mb-2"><a href="services.html">خدماتي</a></li>
+                        <li class="mb-2"><a href="properties.html">العقارات</a></li>
+                        <li class="mb-2"><a href="legal.html">التراخيص</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <h5 class="fw-bold mb-3">تواصل معنا</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-phone text-warning me-2"></i>
+                            <a href="tel:+971509505019">+971 50 950 5019</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-envelope text-warning me-2"></i>
+                            <a href="mailto:omar@property.com">omar@property.com</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+                            <span>دبي، الإمارات العربية المتحدة</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold mb-3">ساعات العمل</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">السبت - الخميس: 9 صباحاً - 7 مساءً</li>
+                        <li class="mb-2">الجمعة: 2 ظهراً - 7 مساءً</li>
+                        <li class="mb-2">استشارات عن بعد: متاحة 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-light opacity-25 my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 عمر الصيعري. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ترخيص رقم: <span class="text-warning">123456</span> من الهيئة التنظيمية للإمارات</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-            <label for="edit-amount">المبلغ (موجب للإيداع، سالب للمصروف):</label>
-            <input type="number" id="edit-amount" required><br>
-
-            <label for="edit-desc">الوصف/الملاحظات:</label>
-            <input type="text" id="edit-desc" required><br>
-            
-            <button type="submit" style="background-color: var(--primary-color);">حفظ التعديلات</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    const unitsMap = {
-        "الفيلا والمبنى الرئيسي": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],    
-        "المجلس 101": [15, 16, 17, 18, 19, 20, 21], 
-        "المجلس 102": [22, 23, 24, 25] 
-    };
-    let transactions = []; 
-
-    // ===================================
-    // وظائف التخزين والحساب
-    // ===================================
-
-    function loadTransactions() {
-        const storedTransactions = localStorage.getItem('hesabatTransactions');
-        if (storedTransactions) {
-            transactions = JSON.parse(storedTransactions);
-        }
-        updateSummary();
-    }
-
-    function saveTransactions() {
-        localStorage.setItem('hesabatTransactions', JSON.stringify(transactions));
-    }
-
-    function updateSummary() {
-        let totalDeposits = 0;
-        let totalExpenses = 0;
-        let netIncome = 0;
-
-        transactions.forEach(t => {
-            if (t.amount > 0) {
-                totalDeposits += t.amount;
-            } else {
-                totalExpenses += Math.abs(t.amount); 
+    <!-- الجافاسكريبت -->
+    <script>
+        const API_URL = 'https://omar-backend.onrender.com/api/properties';
+        
+        // بيانات وهمية احتياطية
+        const fallbackProperties = [
+            {
+                _id: "1",
+                title: "فيلا فاخرة في دبي مارينا",
+                location: "دبي مارينا",
+                price: "5,200,000",
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1920&auto=format&fit=crop",
+                description: "فيلا حديثة بمساحة 4500 قدم، 4 غرف نوم، مسبح خاص، وإطلالة على المارينا."
+            },
+            {
+                _id: "2",
+                title: "شقة بثلاث غرف في برج خليفة",
+                location: "داون تاون دبي",
+                price: "3,750,000",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1920&auto=format&fit=crop",
+                description: "شقة فاخرة في أرقى أبراج دبي، 3 غرف نوم، إطلالة بانورامية، وتشطيب سوبر لوكس."
+            },
+            {
+                _id: "3",
+                title: "أرض سكنية للاستثمار في الشارقة",
+                location: "الشارقة - المنطقة السكنية",
+                price: "1,850,000",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1920&auto=format&fit=crop",
+                description: "أرض سكنية بمساحة 10000 قدم مربع، موقع استراتيجي، تصريح بناء متوفر."
             }
-            netIncome += t.amount;
-        });
-        
-        document.getElementById('total-deposits').textContent = totalDeposits.toFixed(2).toLocaleString('en');
-        document.getElementById('total-expenses').textContent = totalExpenses.toFixed(2).toLocaleString('en');
-        document.getElementById('net-income').textContent = netIncome.toFixed(2).toLocaleString('en');
-        
-        const netIncomeElement = document.getElementById('net-income');
-        const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
-        const dangerColor = getComputedStyle(document.documentElement).getPropertyValue('--danger-color');
+        ];
 
-        netIncomeElement.style.color = netIncome >= 0 ? successColor : dangerColor;
-    }
+        // دالة لعرض العقارات
+        function renderProperties(properties, containerId) {
+            const grid = document.getElementById(containerId);
+            grid.innerHTML = properties.map(p => `
+                <div class="col-md-4">
+                    <div class="property-card" onclick="window.location.href='details.html?id=${p._id}'">
+                        <img src="${p.image}" class="w-100" style="height:250px; object-fit:cover;" alt="${p.title}">
+                        <div class="p-4">
+                            <span class="badge bg-light text-dark mb-2">${p.location}</span>
+                            <h5 class="fw-bold my-2 text-dark">${p.title}</h5>
+                            <p class="text-muted small mb-0">${p.description.substring(0, 80)}...</p>
+                            <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
+                                <span class="fw-black text-primary fs-5">${p.price} درهم</span>
+                                <span class="small text-secondary">التفاصيل <i class="fas fa-arrow-left ms-1"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-    // ===================================
-    // وظيفة الحذف الجديدة
-    // ===================================
-    function deleteTransaction(id) {
-        const transactionIndex = transactions.findIndex(t => t.id === id);
-
-        if (transactionIndex > -1) {
-            const transactionType = transactions[transactionIndex].type;
-            const confirmation = confirm(`هل أنت متأكد من حذف ${transactionType} بتاريخ ${transactions[transactionIndex].date}؟ لا يمكن التراجع عن هذا الإجراء.`);
+        // دالة جلب البيانات من API
+        async function fetchProperties() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const mainGrid = document.getElementById('properties-grid');
+            const fallbackGrid = document.getElementById('fallback-properties');
             
-            if (confirmation) {
-                transactions.splice(transactionIndex, 1); // حذف العملية من المصفوفة
-                saveTransactions();
-                updateSummary();
-                renderTransactions();
-                alert('🗑️ تم حذف العملية بنجاح ، بس لا تنسى .');
-            }
-        } else {
-            alert('⚠️ لم يتم العثور على العملية المراد حذفها.');
-        }
-    }
-
-
-    // ===================================
-    // عرض كشف الحركة المالية (مُحدث)
-    // ===================================
-
-    function renderTransactions() {
-        const tableBody = document.getElementById('transactions-table-body');
-        tableBody.innerHTML = ''; 
-
-        if (transactions.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="9" style="text-align: center;">لا توجد حركات مسجلة بعد.</td></tr>';
-            return;
-        }
-
-        const sortedTransactions = [...transactions].sort((a, b) => {
-            if (a.date < b.date) return -1;
-            if (a.date > b.date) return 1;
-            return a.id - b.id; 
-        });
-        
-        let runningBalance = 0;
-        let rowsHtml = [];
-        
-        const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
-        const dangerColor = getComputedStyle(document.documentElement).getPropertyValue('--danger-color');
-
-        sortedTransactions.forEach(t => {
-            runningBalance += t.amount;
-
-            const depositValue = t.amount > 0 ? t.amount.toFixed(2).toLocaleString('en') : '-';
-            const expenseValue = t.amount < 0 ? Math.abs(t.amount).toFixed(2).toLocaleString('en') : '-';
-            const unitDisplay = t.type === 'إيداع' ? `شقة ${t.unit}` : t.unit;
+            // إظهار سبينر التحميل
+            loadingSpinner.style.display = 'block';
+            mainGrid.innerHTML = '';
             
-            rowsHtml.push(`
-                <tr>
-                    <td>${t.date}</td>
-                    <td>${t.type}</td>
-                    <td>${t.building}</td>
-                    <td>${unitDisplay} / ${t.description}</td>
-                    <td>${t.paymentMethod || '-'}</td>
-                    <td class="${t.amount > 0 ? 'deposit' : ''}">${depositValue}</td>
-                    <td class="${t.amount < 0 ? 'expense' : ''}">${expenseValue}</td>
-                    <td style="font-weight: bold; color: ${runningBalance >= 0 ? successColor : dangerColor};">${runningBalance.toFixed(2).toLocaleString('en')}</td>
-                    <td class="action-cell">
-                        <button class="btn-edit" onclick="openModal(${t.id})">تعديل</button>
-                        <button class="btn-delete" onclick="deleteTransaction(${t.id})">حذف</button>
-                    </td>
-                </tr>
-            `);
-        });
-        
-        // عكس ترتيب الصفوف المعروضة ليكون الأحدث هو الأعلى
-        tableBody.innerHTML = rowsHtml.reverse().join('');
-    }
-    
-    // ===================================
-    // وظائف دعم النظام الأساسية
-    // ===================================
-    
-    function showTab(tabId, element) {
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.getElementById(tabId).classList.add('active');
-
-        document.querySelectorAll('nav a').forEach(a => {
-            a.classList.remove('active-link');
-        });
-        element.classList.add('active-link');
-        
-        if (tabId === 'statements') {
-            renderTransactions(); 
-        }
-        if (tabId === 'dashboard') {
-            updateSummary(); 
-        }
-        if (tabId === 'reports') {
-            toggleReportFilters();
-        }
-    }
-
-    function populateUnits() {
-        const buildingSelect = document.getElementById('dep-building');
-        const unitSelect = document.getElementById('dep-unit');
-        const selectedBuilding = buildingSelect.value;
-
-        unitSelect.innerHTML = '<option value="">-- اختر شقة --</option>';
-
-        if (selectedBuilding && unitsMap[selectedBuilding]) {
-            unitSelect.disabled = false;
-            const units = unitsMap[selectedBuilding];
-
-            units.forEach(unitNumber => {
-                const option = document.createElement('option');
-                option.value = unitNumber;
-                option.textContent = `شقة رقم ${unitNumber}`;
-                unitSelect.appendChild(option);
-            });
-        } else {
-            unitSelect.disabled = true;
-        }
-    }
-    
-    // ===================================
-    // معالجة النماذج
-    // ===================================
-
-    document.getElementById('deposit-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const newTransaction = {
-            date: document.getElementById('dep-date').value,
-            type: 'إيداع',
-            amount: parseFloat(document.getElementById('dep-amount').value),
-            paymentMethod: document.getElementById('dep-payment-method').value, 
-            building: document.getElementById('dep-building').value,
-            unit: document.getElementById('dep-unit').value,
-            description: document.getElementById('dep-desc').value || 'إيجار مدفوع',
-            id: Date.now() 
-        };
-
-        transactions.push(newTransaction);
-        saveTransactions();
-        updateSummary();
-        this.reset();
-        alert('✅  تم تسجيل الإيداع بنجاح يا سعيد البطل !');
-        document.getElementById('dep-unit').disabled = true; 
-    });
-
-    document.getElementById('expense-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const newTransaction = {
-            date: document.getElementById('exp-date').value,
-            type: 'مصروف',
-            amount: parseFloat(document.getElementById('exp-amount').value) * -1, 
-            paymentMethod: 'نقدي/غير محدد', 
-            building: 'مصروفات',
-            unit: document.getElementById('exp-type').value, 
-            description: document.getElementById('exp-desc').value,
-            id: Date.now()
-        };
-
-        transactions.push(newTransaction);
-        saveTransactions();
-        updateSummary();
-        this.reset();
-        alert('✅ تم تسجيل المصروف بنجاح!');
-    });
-
-
-    // ===================================
-    // وظائف التعديل (Editing)
-    // ===================================
-    
-    function openModal(id) {
-        const transaction = transactions.find(t => t.id === id);
-        if (!transaction) return;
-
-        document.getElementById('edit-id').value = id;
-        document.getElementById('edit-date').value = transaction.date;
-        document.getElementById('edit-amount').value = transaction.amount; 
-        document.getElementById('edit-desc').value = transaction.description;
-
-        document.getElementById('editModal').style.display = "block";
-    }
-
-    function closeModal() {
-        document.getElementById('editModal').style.display = "none";
-    }
-
-    document.getElementById('edit-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const idToEdit = parseFloat(document.getElementById('edit-id').value);
-        const newDate = document.getElementById('edit-date').value;
-        const newAmount = parseFloat(document.getElementById('edit-amount').value);
-        const newDesc = document.getElementById('edit-desc').value;
-
-        const transactionIndex = transactions.findIndex(t => t.id === idToEdit);
-
-        if (transactionIndex > -1) {
-            const originalType = transactions[transactionIndex].type;
-            
-            transactions[transactionIndex].date = newDate;
-            transactions[transactionIndex].amount = newAmount; 
-            transactions[transactionIndex].description = newDesc;
-            
-            if (originalType === 'إيداع' && newAmount < 0) {
-                 transactions[transactionIndex].type = 'مصروف';
-                 transactions[transactionIndex].building = 'مصروفات';
-            } else if (originalType === 'مصروف' && newAmount > 0) {
-                 transactions[transactionIndex].type = 'إيداع';
-                 transactions[transactionIndex].building = 'تحتاج مراجعة (إيداع)'; 
-            }
-
-            saveTransactions();
-            updateSummary();
-            renderTransactions();
-            closeModal();
-            alert('✅ تم تعديل العملية بنجاح! يرجى مراجعة تفاصيل المبنى/الوحدة إذا تم تغيير نوع العملية جذرياً.');
-        } else {
-            alert('⚠️ لم يتم العثور على العملية للتعديل.');
-        }
-    });
-
-    window.onclick = function(event) {
-        const modal = document.getElementById('editModal');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-    
-    // ===================================
-    // وظائف التقارير (كما هي)
-    // ===================================
-
-    function toggleReportFilters() {
-        const type = document.getElementById('report-type').value;
-        document.getElementById('filter-building').style.display = type === 'building' ? 'block' : 'none';
-    }
-
-    function generateReport() {
-        const reportType = document.getElementById('report-type').value;
-        const output = document.getElementById('report-output');
-        const title = document.getElementById('report-title');
-        output.innerHTML = '';
-        
-        if (transactions.length === 0) {
-            output.innerHTML = '<p style="color: red;">لا توجد بيانات لتوليد التقرير.</p>';
-            return;
-        }
-
-        if (reportType === 'annual') {
-            title.textContent = 'تقرير الأداء الإجمالي السنوي/الشهري';
-            output.innerHTML = generateAnnualReport();
-        } else if (reportType === 'building') {
-            const selectedBuilding = document.getElementById('report-building-select').value;
-            title.textContent = `تقرير أداء العقار: ${selectedBuilding}`;
-            output.innerHTML = generateBuildingReport(selectedBuilding);
-        }
-    }
-
-    function generateAnnualReport() {
-        const monthlyData = {};
-        transactions.forEach(t => {
-            const monthYear = t.date.substring(0, 7); 
-            if (!monthlyData[monthYear]) {
-                monthlyData[monthYear] = { deposits: 0, expenses: 0, net: 0 };
-            }
-            if (t.amount > 0) {
-                monthlyData[monthYear].deposits += t.amount;
-            } else {
-                monthlyData[monthYear].expenses += Math.abs(t.amount);
-            }
-            monthlyData[monthYear].net += t.amount;
-        });
-
-        const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
-        const dangerColor = getComputedStyle(document.documentElement).getPropertyValue('--danger-color');
-
-        let html = '<table><thead><tr><th>الشهر/السنة</th><th>الإيرادات</th><th>المصروفات</th><th>صافي الدخل</th></tr></thead><tbody>';
-        
-        const sortedMonths = Object.keys(monthlyData).sort();
-
-        sortedMonths.forEach(month => {
-            const data = monthlyData[month];
-            html += `
-                <tr>
-                    <td>${month}</td>
-                    <td>${data.deposits.toFixed(2).toLocaleString('en')}</td>
-                    <td>${data.expenses.toFixed(2).toLocaleString('en')}</td>
-                    <td style="color: ${data.net >= 0 ? successColor : dangerColor}; font-weight: bold;">${data.net.toFixed(2).toLocaleString('en')}</td>
-                </tr>
-            `;
-        });
-
-        html += '</tbody></table>';
-        return html;
-    }
-
-    function generateBuildingReport(building) {
-        let filteredTransactions = transactions;
-        if (building !== 'الكل') {
-            filteredTransactions = transactions.filter(t => t.building === building);
-        }
-        
-        let totalDeposits = 0;
-        let totalExpenses = 0;
-
-        filteredTransactions.forEach(t => {
-            if (t.amount > 0) totalDeposits += t.amount;
-            else totalExpenses += Math.abs(t.amount);
-        });
-
-        const successColor = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
-        const dangerColor = getComputedStyle(document.documentElement).getPropertyValue('--danger-color');
-
-        let html = `
-            <p><strong>صافي الدخل لهذا العقار:</strong> ${(totalDeposits - totalExpenses).toFixed(2).toLocaleString('en')} ريال</p>
-            <p style="color: ${successColor};">إجمالي الإيداعات: ${totalDeposits.toFixed(2).toLocaleString('en')} ريال</p>
-            <p style="color: ${dangerColor};">إجمالي المصروفات: ${totalExpenses.toFixed(2).toLocaleString('en')} ريال</p>
-        `;
-
-        if (building !== 'الكل') {
-            const unitPerformance = {};
-            filteredTransactions.filter(t => t.type === 'إيداع').forEach(t => {
-                const unitKey = t.unit;
-                if (!unitPerformance[unitKey]) {
-                    unitPerformance[unitKey] = 0;
+            try {
+                const res = await fetch(API_URL);
+                
+                if (!res.ok) throw new Error('فشل الاتصال بالخادم');
+                
+                const data = await res.json();
+                
+                // إخفاء السبينر
+                loadingSpinner.style.display = 'none';
+                
+                // إذا كانت هناك بيانات، عرضها
+                if (data && data.length > 0) {
+                    renderProperties(data, 'properties-grid');
+                } else {
+                    // إذا كانت البيانات فارغة، عرض البدائل
+                    renderProperties(fallbackProperties, 'properties-grid');
                 }
-                unitPerformance[unitKey] += t.amount;
-            });
-
-            html += '<h3>أداء الوحدات (الشقق)</h3>';
-            html += '<table><thead><tr><th>الشقة</th><th>إجمالي الإيرادات</th></tr></thead><tbody>';
-            
-            Object.keys(unitPerformance).sort((a, b) => a - b).forEach(unit => {
-                html += `
-                    <tr>
-                        <td>شقة رقم ${unit}</td>
-                        <td>${unitPerformance[unit].toFixed(2).toLocaleString('en')}</td>
-                    </tr>
+            } catch (e) {
+                console.warn("فشل الاتصال بالخادم، جاري عرض عقارات افتراضية:", e.message);
+                
+                // إخفاء السبينر وإظهار البدائل
+                loadingSpinner.style.display = 'none';
+                renderProperties(fallbackProperties, 'properties-grid');
+                
+                // إظهار رسالة للمستخدم
+                const alertHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-warning text-center">
+                            <i class="fas fa-info-circle me-2"></i>
+                            جاري عرض عقارات افتراضية. البيانات الحقيقية ستظهر عند اتصال الخادم.
+                        </div>
+                    </div>
                 `;
-            });
-            html += '</tbody></table>';
+                mainGrid.insertAdjacentHTML('afterbegin', alertHTML);
+            }
         }
-        
-        return html;
-    }
-    
-    function printReport() {
-        const reportContent = document.getElementById('report-output').innerHTML;
-        const title = document.getElementById('report-title').textContent;
-        const printWindow = window.open('', '', 'height=600,width=800');
-        printWindow.document.write('<html><head><title>' + title + '</title>');
-        printWindow.document.write('<style>body { font-family: Arial, sans-serif; direction: rtl; text-align: right; } table { width: 100%; border-collapse: collapse; margin-top: 20px; } th, td { border: 1px solid #000; padding: 8px; text-align: right; } th { background-color: #f2f2f2; } </style>');
-        printWindow.document.write('</head><body>');
-        printWindow.document.write('<h1>' + title + '</h1>');
-        printWindow.document.write(reportContent);
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
 
-
-    // 11. تشغيل عند تحميل الصفحة
-    window.onload = function() {
-        loadTransactions();
-        showTab('dashboard', document.querySelector('nav a:first-child')); 
-    };
-</script>
-
+        // تحميل العقارات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', fetchProperties);
+    </script>
 </body>
 </html>
